@@ -75,24 +75,24 @@
         const fetchPriceAction = () => {
           return (dispatch, getState) => {
             dispatch(createFetchPrice())
-            console.log('fetching price');
-            console.log('waiting a second')
-            setTimeout(() => {
-              console.log('done waiting');
-              // dispatch(createFetchPriceError('test'))
-              dispatch(createFetchPriceReceived(mockData.last_price))
-            }, 1000)
+            // console.log('fetching price');
+            // console.log('waiting a second')
+            // setTimeout(() => {
+            //   console.log('done waiting');
+            //   // dispatch(createFetchPriceError('test'))
+            //   dispatch(createFetchPriceReceived(mockData.last_price))
+            // }, 1000)
 
-            // return fetch('https://api.bitfinex.com/v1/pubticker/btcusd')
-            //   .then(response => response.json())
-            //   .then(data => {
-            //     console.log('received price: ', data)
-            //     dispatch(createFetchPriceReceived(data.last_price))
-            //   })
-            //   .catch(error => {
-            //     console.warn('received error: ', error)
-            //     dispatch(createFetchPriceError(error.message));
-            //   });
+            return fetch('https://api.bitfinex.com/v1/pubticker/btcusd')
+              .then(response => response.json())
+              .then(data => {
+                console.log('received price: ', data)
+                dispatch(createFetchPriceReceived(data.last_price))
+              })
+              .catch(error => {
+                console.warn('received error: ', error)
+                dispatch(createFetchPriceError(error.message));
+              });
           }
         }
 
